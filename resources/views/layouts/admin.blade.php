@@ -7,18 +7,18 @@
         
         <!-- CSRF Token -->
          {{-- 後の章で解説 --}}
-         <meta name="crsf-token" content="{{ csrf_token() }}">
+         <meta name="csrf-token" content="{{ csrf_token() }}">
          
         {{-- 各ページ毎に1titleタグを入れる為、@yieldで空けておく--}}
         <title>@yield('title')</title>
         
-        <!-- scripts -->
+        <!-- Scripts -->
         {{-- Laravel標準で用意されているjavascriptを読み込みます --}}
         <script src="{{ secure_asset('js/app.js') }}" defer></script>
         
         <!-- Fonts -->
-        <LINK rel="dns-prefetch" herf="http://fonts.gstatic.com">
-        <link href="https:fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
         
         <!-- Styles -->
         {{-- Laravel標準で用意されているCSSを読み込みます --}}
@@ -60,7 +60,7 @@
                 
                 @yield('content')
             </main>
-        <div>
+        </div>
     </body>
 </html>
 
