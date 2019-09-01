@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 //php13 追記
 Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
-    Route::get('news/create', 'Admin\NewController@add');
+    Route::get('news/create', 'Admin\NewsController@add');
     Route::post('news/create', 'Admin\NewsController@create'); # 追記
 });
 

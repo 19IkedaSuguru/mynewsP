@@ -15,7 +15,7 @@ class CreateProfileTable extends Migration
     //応用】、
     //名前(name)、性別(gender)、趣味(hobby)、自己紹介(introduction)を保存できるようにする
     {
-        Schema::create('profile', function (Blueprint $table) {
+        Schema::create('profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('gender');

@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 //以下を追加でnew modelを扱える
 use App\News;
 
-class NewController extends Controller
+class NewsController extends Controller
 {
     public function add()
     {
@@ -19,7 +19,7 @@ class NewController extends Controller
   {
       //php14で更に追記
       //Validationを行う
-      $this->validate(request, News::$rules);
+      $this->validate($request, News::$rules);
       
       $news = new News;
       $form = $request->all();
@@ -42,5 +42,8 @@ class NewController extends Controller
       
       // admin/news/createにリダイレクトする
       return redirect('admin/news/create');
-  }  
+  }
+  
+ 
+  
 }
