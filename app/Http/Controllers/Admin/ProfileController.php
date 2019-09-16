@@ -20,7 +20,7 @@ class ProfileController extends Controller
     
     public function create(Request $request)
     {
-        $this->validate($request, Profile::$rules);
+      $this->validate($request, Profile::$rules);
         
       $profile = new Profile;
       $form = $request->all();

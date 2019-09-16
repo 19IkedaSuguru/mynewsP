@@ -2,7 +2,7 @@
 {{-- layouts/profile.blade.phpを読み込む --}}
 @extends('layouts.profile')
 
-{{-- profile.blade.phpの@yield('title')に'ニュースの新規作成'を埋め込む --}}
+{{-- profile.blade.phpの@yield('title')に'Ｍｙ プロフィール'を埋め込む --}}
 @section('title', 'Ｍｙ プロフィール')
 
 {{-- profile.blade.phpの@yield('content')に以下のタグを埋め込む --}}

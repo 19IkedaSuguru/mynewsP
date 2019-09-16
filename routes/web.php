@@ -22,6 +22,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
     Route::get('news', 'Admin\NewsController@index');#php14追記
     Route::get('news/edit', 'Admin\NewsController@edit');#php16追記
     Route::post('news/edit', 'Admin\NewsController@update');#php16追記
+    Route::get('news/delete', 'Admin\NewsController@delete');
 });
 
 ///php13 課題3【応用】
