@@ -44,12 +44,6 @@ class NewsController extends Controller
       $news->fill($form);
       $news->save();
       
-      //9/27追記
-      $history = new History;
-      $history->news_id = $news->id;
-      $history->edited_at = Carbon::now();
-      $history->save();
-      
       // admin/news/createにリダイレクトする
       return redirect('admin/news/');
   }
@@ -101,8 +95,13 @@ class NewsController extends Controller
       //該当するデータを上書きし保存する
       $news->fill($news_form)->save();
       
+       //9/27追記
+      $history = new History;
+      $history->news_id = $news->id;
+      $history->edited_at = Carbon::now();
+      $history->save();
       
-      return redirect('admin/news');
+      return redirect('admin/news/');
   }
   //php16追記
   public function delete(Request $request)
