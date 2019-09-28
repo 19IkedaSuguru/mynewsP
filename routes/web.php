@@ -30,7 +30,7 @@ Route::group(['prefix' => 'admin','middleware' =>'auth'], function() {
     Route::get('profile/create', 'Admin\ProfileController@add');
     Route::post('profile/create', 'Admin\ProfileController@create');
     Route::get('profile/edit', 'Admin\ProfileController@edit');
-    Route::post('profile/edit', 'admin\ProfileController@update');
+    Route::post('profile/edit', 'Admin\ProfileController@update');
 });
 Auth::routes();
 

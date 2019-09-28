@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Auth;
 //課題php14
 use App\Profile;
 
@@ -30,27 +30,20 @@ class ProfileController extends Controller
         return redirect('admin/profile/create');
     }
     
-    public function edit(Request $request)
+    public function edit()
     {
-     //validate
-     $this->validate($request, Profile::$rules);
-     
-      $profile = new Profile;
-      $form = $request->all();
-    // データベースに保存する
-      $profile->fill($form);
-      $profile->save();
-    
-     return view('admin.profile.edit');
+    // 現在認証されているユーザーのID取得
+    $user_id = Auth::id();
+    return view('admin.profile.edit', ['user_id' => $user_id]);
      }
     public function update()
     {
-        
+        // 送信されてきたフォームデータを格納する
+      $profile_form = $request->all();
       $this->validate($request, Profile::$rules);
       // News Modelからデータを取得する
-      $profile = Profile::find($request->id);
-      // 送信されてきたフォームデータを格納する
-      $profile_form = $request->all();
+      $profile = Profile::find($profile_form['user_id']);
+      
       unset($profile_form['_token']);
 
       // 該当するデータを上書きして保存する

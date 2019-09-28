@@ -7,6 +7,10 @@ use App\Http\Controllers\Controller;
 
 //以下を追加でnew modelを扱える
 use App\News;
+//9/27追記
+use App\History;
+
+use Carbon\Carbon;
 
 class NewsController extends Controller
 {
@@ -40,8 +44,14 @@ class NewsController extends Controller
       $news->fill($form);
       $news->save();
       
+      //9/27追記
+      $history = new History;
+      $history->news_id = $news->id;
+      $history->edited_at = Carbon::now();
+      $history->save();
+      
       // admin/news/createにリダイレクトする
-      return redirect('admin/news/create');
+      return redirect('admin/news/');
   }
   //php15で追記
   public function index(Request $request)
@@ -90,6 +100,7 @@ class NewsController extends Controller
       
       //該当するデータを上書きし保存する
       $news->fill($news_form)->save();
+      
       
       return redirect('admin/news');
   }
