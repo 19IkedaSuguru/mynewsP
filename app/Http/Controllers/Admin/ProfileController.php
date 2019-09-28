@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 //課題php14
@@ -20,13 +21,15 @@ class ProfileController extends Controller
     
     public function create(Request $request)
     {
-      $this->validate($request, Profile::$rules);
-        
-      $profile = new Profile;
-      $form = $request->all();
-// データベースに保存する
-      $profile->fill($form);
-      $profile->save();
+        $this->validate($request, Profile::$rules);
+
+        $profile = new Profile;
+        $form = $request->all();
+        $profile->fill($form);
+        // 現在ログインしているユーザーのIDを取得して、Profileに紐付ける
+        $profile->user_id = Auth::id();
+        // データベースに保存する
+        $profile->save();
         return redirect('admin/profile/create');
     }
     
