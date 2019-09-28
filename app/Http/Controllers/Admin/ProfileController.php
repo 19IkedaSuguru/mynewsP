@@ -32,19 +32,12 @@ class ProfileController extends Controller
         $profile->save();
         return redirect('admin/profile/create');
     }
-    
-    public function edit(Request $request)
+
+    public function edit()
     {
-        //validate
-        $this->validate($request, Profile::$rules);
-
-        $profile = new Profile;
-        $form = $request->all();
-        // データベースに保存する
-        $profile->fill($form);
-        $profile->save();
-
-        return view('admin.profile.edit');
+        // 現在ログインしているユーザーのIDを取得して、それに合致するprofileを取得
+        $profile_form = Profile::where('user_id', Auth::id())->first();
+        return view('admin.profile.edit', ['profile_form' => $profile_form]);
     }
 
 
