@@ -26,29 +26,32 @@ class ProfileController extends Controller
       $form = $request->all();
 // データベースに保存する
       $profile->fill($form);
+      // 現在ログインしているユーザーのIDを取得して、Profileに紐付ける
+      $profile->user_id = Auth::id();
+      //データベースに保存ずる
       $profile->save();
         return redirect('admin/profile/create');
     }
     
     public function edit()
     {
-    // 現在認証されているユーザーのID取得
-    $user_id = Auth::id();
-    return view('admin.profile.edit', ['user_id' => $user_id]);
+    // 現在認証されているユーザーのID取得してそれに合致するprofileを取得
+    $profile_form = Plofile::where('user_id' , Auth::id())->first();
+    return view('admin.profile.edit', ['profile_form' => $profile_form]);
      }
-    public function update()
+    public function update(Request $request)
     {
+       
+       $this->validate($request, Profile::$rules);
+       //現在ログインしているユーザーのidを取得してそれに合致するprofileを取得
+       $profile = Profile::where('user_id', Auth::id())->first();
         // 送信されてきたフォームデータを格納する
-      $profile_form = $request->all();
-      $this->validate($request, Profile::$rules);
-      // News Modelからデータを取得する
-      $profile = Profile::find($profile_form['user_id']);
-      
-      unset($profile_form['_token']);
+       $profile_form = $request->all();
+       unset($profile_form['_token']);
 
-      // 該当するデータを上書きして保存する
-      $profile->fill($profile_form)->save();
-    return redirect('admin/profile');
+       // 該当するデータを上書きして保存する
+       $profile->fill($profile_form)->save();
+       return redirect('admin/profile/edit');
     }
     
 }
